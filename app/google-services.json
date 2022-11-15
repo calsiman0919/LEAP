@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "520430829209",
+    "project_id": "languageexchangeapp-726a8",
+    "storage_bucket": "languageexchangeapp-726a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520430829209:android:6c043d3d7f81a56703c208",
+        "android_client_info": {
+          "package_name": "com.application.leapapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520430829209-h4nmq3qpb6g5t7ji555uhkd7ln9gp0dd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgBsvRhyzpvvArfEktaJPXL9R78eJfpZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520430829209-h4nmq3qpb6g5t7ji555uhkd7ln9gp0dd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
