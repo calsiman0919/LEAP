@@ -16,7 +16,6 @@ class LogIn : AppCompatActivity() {
     private lateinit var edtPassword: EditText
     private lateinit var btnSignIn: Button
     private lateinit var btnSignUp: Button
-   // private lateinit var binding: ActivityLogInBinding
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,35 +25,6 @@ class LogIn : AppCompatActivity() {
         supportActionBar?.hide()
 
         mAuth = FirebaseAuth.getInstance()
-        /*
-        binding = ActivityLogInBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.btnSignUp.setOnClickListener {
-            val intent = Intent(this, SignUp::class.java)
-            startActivity(intent)
-        }
-
-        binding.btnSignIn.setOnClickListener {
-            val email = binding.edtEmail.text.toString()
-            val password = binding.edtPassword.text.toString()
-
-
-            if (email.isNotEmpty() && password.isNotEmpty()){
-
-                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                        if (it.isSuccessful){
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                        }else{
-                            Toast.makeText(this, "User does not exist", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-            }else{
-                Toast.makeText(this, "Fill up all the empty fields" , Toast.LENGTH_SHORT).show()
-            }
-        }*/
-
 
         edtEmail = findViewById(R.id.edtEmail)
         edtPassword = findViewById(R.id.edtPassword)
