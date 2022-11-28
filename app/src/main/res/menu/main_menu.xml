@@ -12,19 +12,19 @@
     <item
         android:id="@+id/miFavorites"
         android:title="Favorites"
-        android:icon="@drawable/ic_favorites"
+        android:icon="@drawable/ic_hearts"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/miFind"
         android:title="Find"
-        android:icon="@drawable/findcum"
+        android:icon="@drawable/ic_search"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/miChat"
         android:title="Chat"
-        android:icon="@drawable/message"
+        android:icon="@drawable/ic_chat_bubble"
         app:showAsAction="always" />
 
     <item

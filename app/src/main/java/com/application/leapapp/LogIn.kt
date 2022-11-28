@@ -12,13 +12,11 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LogIn : AppCompatActivity() {
 
-/*
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
     private lateinit var btnSignIn: Button
     private lateinit var btnSignUp: Button
-*/
-    private lateinit var binding: ActivityLogInBinding
+   // private lateinit var binding: ActivityLogInBinding
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +26,7 @@ class LogIn : AppCompatActivity() {
         supportActionBar?.hide()
 
         mAuth = FirebaseAuth.getInstance()
+        /*
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -48,15 +47,14 @@ class LogIn : AppCompatActivity() {
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                         }else{
-                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "User does not exist", Toast.LENGTH_SHORT).show()
                         }
                     }
             }else{
                 Toast.makeText(this, "Fill up all the empty fields" , Toast.LENGTH_SHORT).show()
             }
-        }
+        }*/
 
-/*
 
         edtEmail = findViewById(R.id.edtEmail)
         edtPassword = findViewById(R.id.edtPassword)
@@ -74,7 +72,21 @@ class LogIn : AppCompatActivity() {
 
             login(email,password);
         }
-*/
+
+    }
+
+    private fun login(email: String, password: String) {
+
+        mAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    finish()
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this,"Invalid Email/Password", Toast.LENGTH_SHORT).show()
+                }
+            }
 
     }
 
@@ -87,17 +99,4 @@ class LogIn : AppCompatActivity() {
         }
     }
 
-    /*private fun login(email: String, password: String){
-
-        mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this,"Invalid Email/Password", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-    }*/
 }
