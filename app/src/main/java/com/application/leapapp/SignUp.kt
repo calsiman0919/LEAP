@@ -57,7 +57,7 @@ class SignUp : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     addUserToDataBase(name,email,mAuth.currentUser?.uid!!)
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, DashboardActivity::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(
