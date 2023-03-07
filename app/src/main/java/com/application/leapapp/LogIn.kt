@@ -50,7 +50,7 @@ class LogIn : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this, DashboardActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     finish()
                     startActivity(intent)
                 } else {
@@ -64,7 +64,7 @@ class LogIn : AppCompatActivity() {
         super.onStart()
 
         if(mAuth.currentUser != null){
-            val intent = Intent(this, DashboardActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

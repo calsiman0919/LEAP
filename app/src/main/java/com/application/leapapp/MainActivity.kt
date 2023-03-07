@@ -65,5 +65,39 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.miLogout){
+            mAuth.signOut()
+            val intent = Intent(this, LogIn::class.java)
+            startActivity(intent)
+            finish()
+            Toast.makeText(this, "Logout Successful" , Toast.LENGTH_SHORT).show()
+            return true
+        }
+/*
+        fun button(view: View) {
+            mAuth.signOut()
+            val intent = Intent(this, LogIn::class.java)
+            startActivity(intent)
+            finish()
+            Toast.makeText(this, "Logout Successful" , Toast.LENGTH_SHORT).show()
+        }
+
+        if (item.itemId == R.id.miChat){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+*/
+
+        return true
     }
 }
