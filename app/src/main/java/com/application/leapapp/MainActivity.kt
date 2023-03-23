@@ -5,15 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.application.leapapp.adapter.ViewPagerAdapter
+import com.application.leapapp.databinding.ActivityMainBinding
+import com.application.leapapp.ui.CallFragment
+import com.application.leapapp.ui.ChatFragment
+import com.application.leapapp.ui.StatusFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.math.min
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userList: ArrayList<UserList>
     private lateinit var adapter: UserAdapter
     private lateinit var mDbRef: DatabaseReference
+    private var binding: ActivityMainBinding? = null
 
 
 
@@ -31,40 +33,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mAuth = FirebaseAuth.getInstance()
-        mDbRef = FirebaseDatabase.getInstance().getReference()
 
-        userList = ArrayList()
-        adapter = UserAdapter(this, userList)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        rvUserList = findViewById(R.id.rvUserlist)
+        setContentView(binding!!.root)
 
-        rvUserlist.layoutManager = LinearLayoutManager (this)
-        rvUserList.adapter = adapter
+        val fragmentArrayList = ArrayList<Fragment>()
 
-        mDbRef.child("user").addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+        fragmentArrayList.add(ChatFragment())
+        fragmentArrayList.add(StatusFragment())
+        fragmentArrayList.add(CallFragment())
 
-                userList.clear()
-                for (postSnapshopt in snapshot.children){
+        val adapter = ViewPagerAdapter(this, supportFragmentManager, fragmentArrayList)
 
-                    val currentUser = postSnapshopt.getValue(UserList::class.java)
+        binding!!.viewPager.adapter = adapter
 
-                    if(mAuth.currentUser?.uid != currentUser?.uid){
-                        userList.add(currentUser!!)
-                    }
-
-                }
-
-                adapter.notifyDataSetChanged()
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
-
+        binding!!.Tabs.setupWithViewPager(binding!!.viewPager)
 
     }
 
@@ -75,7 +59,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.miLogout){
+        if (item.itemId == R.id.miChat){
+            val intent = Intent(this, ChatUser::class.java)
+            startActivity(intent)
+            return true
+
+        } else if (item.itemId == R.id.miLogout){
             mAuth.signOut()
             val intent = Intent(this, LogIn::class.java)
             startActivity(intent)
@@ -83,20 +72,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Logout Successful" , Toast.LENGTH_SHORT).show()
             return true
         }
-/*
-        fun button(view: View) {
-            mAuth.signOut()
-            val intent = Intent(this, LogIn::class.java)
-            startActivity(intent)
-            finish()
-            Toast.makeText(this, "Logout Successful" , Toast.LENGTH_SHORT).show()
-        }
-
-        if (item.itemId == R.id.miChat){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-*/
 
         return true
     }
