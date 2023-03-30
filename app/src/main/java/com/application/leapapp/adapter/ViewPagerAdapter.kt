@@ -23,7 +23,7 @@ class ViewPagerAdapter(
     }
 
     companion object{
-        val TAB_TITLES = arrayOf("Learn","Status","Call")
+        val TAB_TITLES = arrayOf("Learn","Find","Call")
     }
 
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,8 @@ import com.application.leapapp.ui.ChatFragment
 import com.application.leapapp.ui.StatusFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_log_in.*
+import kotlinx.android.synthetic.main.fragment_chat.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,11 +29,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mDbRef: DatabaseReference
     private var binding: ActivityMainBinding? = null
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        /*ImageView panaPal = (ImageView) findViewById(R.id.panaPal),
+        panaPal.setImageResource(R.drawable.learn_cordillera)*/
 
         mAuth = FirebaseAuth.getInstance()
 
