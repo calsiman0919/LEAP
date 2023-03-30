@@ -35,7 +35,7 @@ class StatusFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find, container, false)
+        return inflater.inflate(R.layout.fragment_contacts, container, false)
     }
 
     companion object {
