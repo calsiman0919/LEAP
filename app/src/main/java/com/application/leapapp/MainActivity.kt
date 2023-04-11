@@ -33,9 +33,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*ImageView panaPal = (ImageView) findViewById(R.id.panaPal),
-        panaPal.setImageResource(R.drawable.learn_cordillera)*/
-
         mAuth = FirebaseAuth.getInstance()
 
         binding = ActivityMainBinding.inflate(layoutInflater)

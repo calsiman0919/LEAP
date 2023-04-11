@@ -5,56 +5,88 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.application.leapapp.R
+import com.example.searchviewkotlin.LanguageAdapter
+import com.example.searchviewkotlin.LanguageAdapter2
+import com.example.searchviewkotlin.LanguageData
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [StatusFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class StatusFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var searchView: SearchView
+    private var mList = ArrayList<LanguageData>()
+    private lateinit var adapter: LanguageAdapter2
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.list_view2, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerView)
+        searchView = requireView().findViewById(R.id.searchView)
+
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        addDataToList()
+        adapter = LanguageAdapter2(mList)
+        recyclerView.adapter = adapter
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+
+        })
+
+    }
+
+
+
+    private fun filterList(query: String?) {
+
+        if (query != null) {
+            val filteredList = ArrayList<LanguageData>()
+            for (i in mList) {
+                if (i.title.lowercase(Locale.ROOT).contains(query)) {
+                    filteredList.add(i)
+                }
+            }
+
+            if (filteredList.isEmpty()) {
+                Toast.makeText(activity, "No Data found", Toast.LENGTH_SHORT).show()
+            } else {
+                adapter.setFilteredList(filteredList)
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact, container, false)
+    private fun addDataToList() {
+        mList.add(LanguageData("realkankanaey", R.drawable.ic_person))
+        mList.add(LanguageData("Bantay ti Igorot", R.drawable.ic_person))
+        mList.add(LanguageData("ifugao", R.drawable.ic_person))
+        mList.add(LanguageData("bontoc main", R.drawable.ic_person))
+        mList.add(LanguageData("Kalinga Scripted", R.drawable.ic_person))
+        mList.add(LanguageData("Bontoc Mtn Prov", R.drawable.ic_person))
+        mList.add(LanguageData("CAR language learner", R.drawable.ic_person))
+        mList.add(LanguageData("corndog ti buguias", R.drawable.ic_person))
+        mList.add(LanguageData("test1", R.drawable.ic_person))
+        mList.add(LanguageData("test2", R.drawable.ic_person))
+        mList.add(LanguageData("test3", R.drawable.ic_person))
+        mList.add(LanguageData("test4", R.drawable.ic_person))
+        mList.add(LanguageData("test5", R.drawable.ic_person))
+        mList.add(LanguageData("admin1", R.drawable.ic_person))
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment StatusFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            StatusFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
